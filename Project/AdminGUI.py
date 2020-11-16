@@ -123,11 +123,7 @@ def openEditUser():
     num.place(x=950,y=50)
      
     Label(editUser, text="Specs:", fg= "black", font= "none 14 bold").place(x=525, y=90)
-    newcamera = IntVar()
-    newmotion = IntVar()
-    newbuzzer = IntVar()
-    newfire = IntVar()
-    newlock = IntVar()
+    
     
     Checkbutton(editUser, text= "Camera", variable= newcamera, fg= "black", font= "none 14", width=10, height=2).place(x=290, y=115)
     Checkbutton(editUser, text= "Motion", variable= newmotion, fg= "black", font= "none 14", width=10, height=2).place(x=400, y=115)
@@ -154,7 +150,6 @@ def openHistory():
           text ="Pull History of User With Unique ID", font="none 16 bold").pack()
     
     Label(history, text="Insert Desired Id", fg= "black", font= "none 12 bold").place(x=200, y=45)
-    id_num = StringVar()
     iD = Entry(history, textvariable= id_num, width=5)
     iD.pack()
     iD.place(x=340,y=47)
@@ -177,11 +172,25 @@ window.configure( background="Black")
 #Title
 Label(window, text="ADMIN GUI", bg= "black", fg= "lime", font= "none 20 bold").place(x=75, y=20)
 ##ADD USER
+user_id= StringVar()
+name= StringVar()
+address= StringVar()
+number= StringVar()
+read= StringVar()
+write= StringVar()
+specs= StringVar()
+newcamera = IntVar()
+newmotion = IntVar()
+newbuzzer = IntVar()
+newfire = IntVar()
+newlock = IntVar()
 submit = Button(window, text="Add New User", bg="lime", fg= "black", font= "none 12 bold", width=20, height=2, command= openNewUser).place(x=50, y=80)
 ##Edit USER
 submit = Button(window, text=" Edit User ", bg="lime", fg= "black", font= "none 12 bold", width=20, height=2, command= openEditUser).place(x=50, y=140)
 ##Get USER History
-submit = Button(window, text="Request History", bg="lime", fg= "black", font= "none 12 bold", width=20, height=2, command= openHistory).place(x=50, y=200)
 log= StringVar()
+id_num = StringVar()
+submit = Button(window, text="Request History", bg="lime", fg= "black", font= "none 12 bold", width=20, height=2, command= openHistory).place(x=50, y=200)
+
 
 window.mainloop()

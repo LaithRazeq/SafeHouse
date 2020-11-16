@@ -33,8 +33,7 @@ def read_data_thingspeak(key):
     for x in data:
         t.append(x['field1'])
         t.append(x['field2'])
-        t.append(x['field1'])
+        t.append(x['field3'])
         t.append(x['field4'])
-        t.append(x['field5'])
-            
+        t.append(x['field5'])               
     return t
