@@ -5,8 +5,7 @@ import requests
 
 # Define a function that will post on server every 15 Seconds
 
-def thingspeak_write(ID, arm,lock,cam,buzz,move, key):
-    userID = ID
+def thingspeak_write(arm,lock,cam,buzz,move, key):
     isArmed = arm
     isLocked = lock
     isCamera = cam
@@ -14,7 +13,7 @@ def thingspeak_write(ID, arm,lock,cam,buzz,move, key):
     isMotion = move
     URl='https://api.thingspeak.com/update?api_key='
     KEY= key
-    HEADER='&field1={}&field2={}&field3={}&field4={}&field5={}field6={}'.format(userID,isArmed,isLocked,isCamera,isBuzzer,isMotion)
+    HEADER='&field1={}&field2={}&field3={}&field4={}&field5={}'.format(isArmed,isLocked,isCamera,isBuzzer,isMotion)
     NEW_URL=URl+KEY+HEADER
     print(NEW_URL)
     data=urllib.request.urlopen(NEW_URL)

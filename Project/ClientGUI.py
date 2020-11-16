@@ -12,7 +12,7 @@ WRITE_KEY="2RPJIJYO785ETAE7"
 # Functions
 def systemUpToDate():
     label.set("System Status: Up to date")
-    thingspeak_write(ID,isArmed, isLocked, isCamera, isBuzzer, isMotion, WRITE_KEY)
+    thingspeak_write(isArmed.get(), isLocked.get(), isCamera.get(), isBuzzer.get(), isMotion.get(), WRITE_KEY)
     
 def systemNotUpToDate():
     label.set("System Status: NOT up to date")
