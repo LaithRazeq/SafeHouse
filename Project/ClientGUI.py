@@ -3,10 +3,9 @@ from TSHistory import thingspeak_read
 from TSCommand import thingspeak_write
 
 
-
-ID = 1162635
-READ_KEY="XXNMKPPU1BIUDEHT"
-WRITE_KEY="0SRNSG4FBAVGI7TR"
+ID = '1162635' # TS History ID
+READ_KEY="XXNMKPPU1BIUDEHT" # TS History Read Key
+WRITE_KEY="0SRNSG4FBAVGI7TR"# TS Command Write Key
 
 
 # Functions
@@ -20,7 +19,7 @@ def systemNotUpToDate():
 def readHistory():
     openHistory()
     log.set("")
-    arr = thingspeak_read(READ_KEY, "10")
+    arr = thingspeak_read(READ_KEY,ID, "10")
     history= ""
     for x in arr:
         history+= x+'\n\n'
