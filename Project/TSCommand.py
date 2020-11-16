@@ -25,20 +25,17 @@ def read_data_thingspeak(key):
     KEY= key
     HEADER='&results=1'
     NEW_URL=URL+KEY+HEADER
-    print(NEW_URL)
 
     get_data=requests.get(NEW_URL).json()
-    #print(get_data)
-    channel_id=get_data['channel']['id']
 
-    field_1=get_data['feeds']
-    #print(field_1)
+    data=get_data['feeds']
 
     t=[]
-    t.append(x['field1'])
-    t.append(x['field2'])
-    t.append(x['field1'])
-    t.append(x['field4'])
-    t.append(x['field5'])
-    t.append(x['field6'])
+    for x in data:
+        t.append(x['field1'])
+        t.append(x['field2'])
+        t.append(x['field1'])
+        t.append(x['field4'])
+        t.append(x['field5'])
+            
     return t

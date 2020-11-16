@@ -31,11 +31,10 @@ def thingspeak_read(read_key:str, num_entries:str)->str:
     KEY= read_key
     HEADER='&results='
     NEW_URL=URL+KEY+HEADER+num_entries
-   
+    
     
     get_data=requests.get(NEW_URL).json()
     
-    channel_id=get_data['channel']['id']
     
     field_1=get_data['feeds']
     
