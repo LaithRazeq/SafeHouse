@@ -1,14 +1,16 @@
 from tkinter import *
 from TSHistory import thingspeak_read
-
+from UsersDatabase import read_database
 
 
 def addNewUser():
     print("ok")
 
+
 def readHistory():
     log.set("")
-    arr = thingspeak_read("XXNMKPPU1BIUDEHT", "10")
+    key = read_database(id_num)
+    arr = thingspeak_read(key, "10")
     h= ""
     for x in arr:
         h+= x+'\n\n'
@@ -152,7 +154,8 @@ def openHistory():
           text ="Pull History of User With Unique ID", font="none 16 bold").pack()
     
     Label(history, text="Insert Desired Id", fg= "black", font= "none 12 bold").place(x=200, y=45)
-    iD = Entry(history, width=5)
+    id_num = StringVar()
+    iD = Entry(history, textvariable= id_num, width=5)
     iD.pack()
     iD.place(x=340,y=47)
     
