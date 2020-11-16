@@ -1,9 +1,19 @@
 from tkinter import *
+from TSHistory import thingspeak_read
+
 
 
 def addNewUser():
     print("ok")
-    
+
+def readHistory():
+    log.set("")
+    arr = thingspeak_read("XXNMKPPU1BIUDEHT", "10")
+    h= ""
+    for x in arr:
+        h+= x+'\n\n'
+    log.set(h)
+
 # Add new user window
 def openNewUser():  
     # Toplevel object which will  
@@ -124,7 +134,9 @@ def openEditUser():
     Checkbutton(editUser, text= "Lock", variable= newlock, fg= "black", font= "none 14", width=10, height=2).place(x=730, y=115)
     
     submit = Button(editUser, text="Submit", fg= "black", font= "none 12 bold", width=10, height=1, command= addNewUser).place(x=500, y=170)    
-    
+
+
+
 # Request History Window
 def openHistory():  
     # Toplevel object which will  
@@ -144,12 +156,12 @@ def openHistory():
     iD.pack()
     iD.place(x=340,y=47)
     
-    submit = Button(history, text="Request", fg= "black", font= "none 12 bold", width=10, height=1, command= addNewUser).place(x=400, y=40)
     
-    #History Labels
-    log= StringVar()
-    log.set("ggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg \n kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk\n kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk\n kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk\n kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk\n kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk\n kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk\n kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk")
-    historyLog=Label(history, textvariable=log, justify= LEFT, padx= 2, pady= 2, bg="grey").place(x=20, y=90)
+    #History Labels     
+    Label(history, textvariable=log, justify= LEFT, padx= 2, pady= 2, bg="grey").place(x=120, y=90)
+    
+    req = Button(history, text="Request", fg= "black", font= "none 12 bold", width=10, height=1, command= readHistory).place(x=400, y=40)
+    
         
     
 
@@ -167,6 +179,6 @@ submit = Button(window, text="Add New User", bg="lime", fg= "black", font= "none
 submit = Button(window, text=" Edit User ", bg="lime", fg= "black", font= "none 12 bold", width=20, height=2, command= openEditUser).place(x=50, y=140)
 ##Get USER History
 submit = Button(window, text="Request History", bg="lime", fg= "black", font= "none 12 bold", width=20, height=2, command= openHistory).place(x=50, y=200)
-
+log= StringVar()
 
 window.mainloop()
