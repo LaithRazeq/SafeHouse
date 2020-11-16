@@ -1,12 +1,27 @@
 from tkinter import *
+from TSHistory import thingspeak_read
 
-# Function
+
+
+
+ID = 1
+READ_KEY="9605ZFO7C86OGGP1"
+WRITE_KEY="2RPJIJYO785ETAE7"
+
+
+# Functions
 def systemUpToDate():
     label.set("System Status: Up to date")
-    update
+    #thingspeak_write(ID,isArmed, isLocked, isCamera, isBuzzer, isMotion, WRITE_KEY)
+    
 def systemNotUpToDate():
     label.set("System Status: NOT up to date")
-
+    
+def readHistory(arr):
+    historyLog.delete(0.0, END)
+    for z in arr:
+        historyLog.insert(END, z+'\n')
+   
 
 # Create main window
 window = Tk()
@@ -45,14 +60,13 @@ submit = Button(window, text="Update System Status", bg="lime", fg= "black", fon
 #subtitle
 Label(window, text="System History", bg="black", fg="lime", font="none 15 bold").place(x=675, y=80)
 
-#Get History Button
-submit = Button(window, text="Request History", bg="lime", fg= "black", font= "none 12 bold", width=20, height=2, command= systemUpToDate).place(x=650, y=500)
-
 #History Labels
+historyLog=Text(window, width=50, height=20, wrap=WORD, background="grey")
+historyLog.place(x=550, y=135)
+historyLog.delete(0.0, END)
 
-
-
-
+#Get History Button
+submit = Button(window, text="Request History", bg="lime", fg= "black", font= "none 12 bold", width=20, height=2, command= readHistory(thingspeak_read(READ_KEY, "10"))).place(x=650, y=500)
 
 
 window.mainloop()
