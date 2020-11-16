@@ -4,7 +4,19 @@ from UsersDatabase import *
 
 
 def addNewUser():
-    specs
+    specs = ""
+    if newcamera1:
+        specs += "Camera, "
+    if newmotion1:
+        specs += "MotionSensor, "
+    if newbuzzer1:
+        specs += "Buzzer, "
+    if newfire1:
+        specs += "FireSensor, "
+    if newlock1:
+        specs += "DoorLock, " 
+    specs[:-1]
+    specs+= "."
     write_database(user_id1.get(), name1.get(), address1.get(), number1.get(), read1.get(), write1.get(), specs)
     
 def updateExisitingUser():
