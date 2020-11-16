@@ -26,8 +26,8 @@ def thingspeak_write(id_num:int, date:str, time:str, sensor_type:str, save_locat
 
 
 
-def thingspeak_read(read_key:str, num_entries:str)->str:
-    URL = 'https://api.thingspeak.com/channels/1162635/feeds.json?api_key='
+def thingspeak_read(read_key:str,id_num: str, num_entries:str)->str:
+    URL = 'https://api.thingspeak.com/channels/'+id_num+'/feeds.json?api_key='
     KEY= read_key
     HEADER='&results='
     NEW_URL=URL+KEY+HEADER+num_entries

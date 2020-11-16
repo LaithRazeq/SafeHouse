@@ -9,10 +9,10 @@ gino= datetime.datetime.now()
 date=(str(gino.year)+'-'+str(gino.month)+'-'+str(gino.day))
 t=(str(gino.hour)+':'+str(gino.minute)+':'+str(gino.second))
 
-ID = 2
+ID = "1160874" # TS Command ID
 
-READ_KEY="M8JC1XL6I75J08KL"
-WRITE_KEY="Y10RFX27NP5XFP5L"
+READ_KEY="YOLQ8V4RT6JCZE8Q" # TS Command Read Key
+WRITE_KEY="Y10RFX27NP5XFP5L" # TS Command Write Key
 ARM=0
 LOCK=0
 CAM=0
@@ -21,7 +21,7 @@ MOTION=0
 
 
 def updateStatus()->str:
-    curr_status=read_data_thingspeak(READ_KEY)
+    curr_status=read_data_thingspeak(READ_KEY,ID)
     ARM=curr_status[0]
     LOCK=curr_status[1]
     CAM=curr_status[2]

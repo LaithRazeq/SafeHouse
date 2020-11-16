@@ -19,8 +19,8 @@ def thingspeak_write(arm,lock,cam,buzz,move, key):
     data=urllib.request.urlopen(NEW_URL)
     
 
-def read_data_thingspeak(key):
-    URL='https://api.thingspeak.com/channels/1227483/feeds.json?api_key='
+def read_data_thingspeak(key:str, id_num:str):
+    URL='https://api.thingspeak.com/channels/'+id_num+'/feeds.json?api_key='
     KEY= key
     HEADER='&results=1'
     NEW_URL=URL+KEY+HEADER

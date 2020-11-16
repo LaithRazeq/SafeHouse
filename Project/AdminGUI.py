@@ -12,8 +12,8 @@ def updateExisitingUser():
 
 def readHistory():
     log.set("")
-    key = read_database(id_num)
-    arr = thingspeak_read(key, "10")
+    key = read_database(id_num.get())
+    arr = thingspeak_read(key,id_num.get(), "10")
     h= ""
     for x in arr:
         h+= x+'\n\n'
