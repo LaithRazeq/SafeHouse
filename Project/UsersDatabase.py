@@ -15,7 +15,7 @@ def write_database(iden, Name, addr, num, readkey, writekey, sp):
     dbconnect.commit();
     dbconnect.close();
 
-#write_database("1", "A", "A", "A", "A", "A", "A")
+
 
 
 def read_database(key):
@@ -41,6 +41,8 @@ def edit_database(iden, Name, addr, num, readkey, writekey, sp ):
     dbconnect = sqlite3.connect("users.db");
     dbconnect.row_factory = sqlite3.Row;
     cursor = dbconnect.cursor();
-    cursor.execute('UPDATE users SET Client Name = ?, Address = ?, Phone Number = ?, readKey = ?, writeKey = ?, System Specs = ?',(Id, name, address, phone, Rkey, Wkey, specs))
+    cursor.execute('DELETE FROM users WHERE ID = ?',(Id,))
     dbconnect.commit()
     dbconnect.close()
+    write_database(Id, name, address, phone, Rkey, Wkey, specs)
+    
