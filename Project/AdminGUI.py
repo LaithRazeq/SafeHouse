@@ -1,16 +1,19 @@
 from tkinter import *
 from TSHistory import thingspeak_read
-from UsersDatabase import read_database
+from UsersDatabase import *
 
 
 def addNewUser():
-    print("ok")
-
+    specs
+    write_database(user_id1.get(), name1.get(), address1.get(), number1.get(), read1.get(), write1.get(), specs)
+    
+def updateExisitingUser():
+    return 0
 
 def readHistory():
     log.set("")
-    key = read_database(id_num)
-    arr = thingspeak_read(key, "10")
+    key = read_database(id_num.get())
+    arr = thingspeak_read(key,id_num.get(), "10")
     h= ""
     for x in arr:
         h+= x+'\n\n'
@@ -32,47 +35,42 @@ def openNewUser():
           text ="Add a New User", font="none 16 bold").pack() 
     
     Label(newUser, text="Id", fg= "black", font= "none 12").place(x=20, y=45)
-    iD = Entry(newUser, width=5)
+    iD = Entry(newUser, textvariable= user_id1, width=5)
     iD.pack()
     iD.place(x=40,y=50)
     
     Label(newUser, text="Name", fg= "black", font= "none 12").place(x=90, y=45)
-    name = Entry(newUser, width=20)
+    name = Entry(newUser, textvariable= name1, width=20)
     name.pack()
     name.place(x=140,y=50)
     
     Label(newUser, text="Address", fg= "black", font= "none 12").place(x=280, y=45)
-    address = Entry(newUser, width=30)
+    address = Entry(newUser, textvariable= address1, width=30)
     address.pack()
     address.place(x=350,y=50) 
     
     Label(newUser, text="Number", fg= "black", font= "none 12").place(x=550, y=45)
-    num = Entry(newUser, width=15)
+    num = Entry(newUser, textvariable= number1, width=15)
     num.pack()
     num.place(x=615,y=50)
     
     Label(newUser, text="Read", fg= "black", font= "none 12").place(x=720, y=45)
-    num = Entry(newUser, width=20)
+    num = Entry(newUser, textvariable= read1, width=20)
     num.pack()
     num.place(x=770,y=50)
     
     Label(newUser, text="Write", fg= "black", font= "none 12").place(x=900, y=45)
-    num = Entry(newUser, width=20)
+    num = Entry(newUser, textvariable= write1, width=20)
     num.pack()
     num.place(x=950,y=50)
      
     Label(newUser, text="Specs:", fg= "black", font= "none 14 bold").place(x=525, y=90)
-    newcamera = IntVar()
-    newmotion = IntVar()
-    newbuzzer = IntVar()
-    newfire = IntVar()
-    newlock = IntVar()
     
-    Checkbutton(newUser, text= "Camera", variable= newcamera, fg= "black", font= "none 14", width=10, height=2).place(x=290, y=115)
-    Checkbutton(newUser, text= "Motion", variable= newmotion, fg= "black", font= "none 14", width=10, height=2).place(x=400, y=115)
-    Checkbutton(newUser, text= "Buzzer", variable= newbuzzer, fg= "black", font= "none 14", width=10, height=2).place(x=510, y=115)
-    Checkbutton(newUser, text= "Fire", variable= newfire, fg= "black", font= "none 14", width=10, height=2).place(x=620, y=115)
-    Checkbutton(newUser, text= "Lock", variable= newlock, fg= "black", font= "none 14", width=10, height=2).place(x=730, y=115)
+    Checkbutton(newUser, text= "Camera", variable= newcamera1, fg= "black", font= "none 14", width=10, height=2).place(x=290, y=115)
+    Checkbutton(newUser, text= "Motion", variable= newmotion1, fg= "black", font= "none 14", width=10, height=2).place(x=400, y=115)
+    Checkbutton(newUser, text= "Buzzer", variable= newbuzzer1, fg= "black", font= "none 14", width=10, height=2).place(x=510, y=115)
+    Checkbutton(newUser, text= "Fire", variable= newfire1, fg= "black", font= "none 14", width=10, height=2).place(x=620, y=115)
+    Checkbutton(newUser, text= "Lock", variable= newlock1, fg= "black", font= "none 14", width=10, height=2).place(x=730, y=115)
     
     submit = Button(newUser, text="Submit", fg= "black", font= "none 12 bold", width=10, height=1, command= addNewUser).place(x=500, y=170)
       
@@ -93,45 +91,44 @@ def openEditUser():
           text ="Edit an Existing User With Unique ID", font="none 16 bold").pack()
     
     Label(editUser, text="Id", fg= "black", font= "none 12").place(x=20, y=45)
-    iD = Entry(editUser, width=5)
+    iD = Entry(editUser, textvariable= user_id2, width=5)
     iD.pack()
     iD.place(x=40,y=50)
     
     Label(editUser, text="Name", fg= "black", font= "none 12").place(x=90, y=45)
-    name = Entry(editUser, width=20)
+    name = Entry(editUser, textvariable= name2, width=20)
     name.pack()
     name.place(x=140,y=50)
     
     Label(editUser, text="Address", fg= "black", font= "none 12").place(x=280, y=45)
-    address = Entry(editUser, width=30)
+    address = Entry(editUser, textvariable= address2, width=30)
     address.pack()
     address.place(x=350,y=50) 
     
     Label(editUser, text="Number", fg= "black", font= "none 12").place(x=550, y=45)
-    num = Entry(editUser, width=15)
+    num = Entry(editUser, textvariable= number2, width=15)
     num.pack()
     num.place(x=615,y=50)
     
     Label(editUser, text="Read", fg= "black", font= "none 12").place(x=720, y=45)
-    num = Entry(editUser, width=20)
+    num = Entry(editUser, textvariable= read2, width=20)
     num.pack()
     num.place(x=770,y=50)
     
     Label(editUser, text="Write", fg= "black", font= "none 12").place(x=900, y=45)
-    num = Entry(editUser, width=20)
+    num = Entry(editUser, textvariable= write2, width=20)
     num.pack()
     num.place(x=950,y=50)
      
     Label(editUser, text="Specs:", fg= "black", font= "none 14 bold").place(x=525, y=90)
+        
+    Checkbutton(editUser, text= "Camera", variable= newcamera2, fg= "black", font= "none 14", width=10, height=2).place(x=290, y=115)
+    Checkbutton(editUser, text= "Motion", variable= newmotion2, fg= "black", font= "none 14", width=10, height=2).place(x=400, y=115)
+    Checkbutton(editUser, text= "Buzzer", variable= newbuzzer2, fg= "black", font= "none 14", width=10, height=2).place(x=510, y=115)
+    Checkbutton(editUser, text= "Fire", variable= newfire2, fg= "black", font= "none 14", width=10, height=2).place(x=620, y=115)
+    Checkbutton(editUser, text= "Lock", variable= newlock2, fg= "black", font= "none 14", width=10, height=2).place(x=730, y=115)
     
-    
-    Checkbutton(editUser, text= "Camera", variable= newcamera, fg= "black", font= "none 14", width=10, height=2).place(x=290, y=115)
-    Checkbutton(editUser, text= "Motion", variable= newmotion, fg= "black", font= "none 14", width=10, height=2).place(x=400, y=115)
-    Checkbutton(editUser, text= "Buzzer", variable= newbuzzer, fg= "black", font= "none 14", width=10, height=2).place(x=510, y=115)
-    Checkbutton(editUser, text= "Fire", variable= newfire, fg= "black", font= "none 14", width=10, height=2).place(x=620, y=115)
-    Checkbutton(editUser, text= "Lock", variable= newlock, fg= "black", font= "none 14", width=10, height=2).place(x=730, y=115)
-    
-    submit = Button(editUser, text="Submit", fg= "black", font= "none 12 bold", width=10, height=1, command= addNewUser).place(x=500, y=170)    
+    submit = Button(editUser, text="Submit", fg= "black", font= "none 12 bold", width=10, height=1, command= updateExisitingUser).place(x=500, y=170)    
 
 
 
@@ -169,25 +166,42 @@ window.minsize(300,300)
 window.maxsize(300,300)
 window.title("SafeHouse Admin")
 window.configure( background="Black")
+
 #Title
 Label(window, text="ADMIN GUI", bg= "black", fg= "lime", font= "none 20 bold").place(x=75, y=20)
-##ADD USER
-user_id= StringVar()
-name= StringVar()
-address= StringVar()
-number= StringVar()
-read= StringVar()
-write= StringVar()
-specs= StringVar()
-newcamera = IntVar()
-newmotion = IntVar()
-newbuzzer = IntVar()
-newfire = IntVar()
-newlock = IntVar()
+
+##ADD USER BUTTON
+#Initilaizing all entry buttons and check boxes
+user_id1= StringVar()
+name1= StringVar()
+address1= StringVar()
+number1= StringVar()
+read1= StringVar()
+write1= StringVar()
+newcamera1 = IntVar()
+newmotion1 = IntVar()
+newbuzzer1 = IntVar()
+newfire1 = IntVar()
+newlock1 = IntVar()
 submit = Button(window, text="Add New User", bg="lime", fg= "black", font= "none 12 bold", width=20, height=2, command= openNewUser).place(x=50, y=80)
-##Edit USER
+
+##Edit USER BUTTON
+#Initilaizing all entry buttons and check boxes
+user_id2= StringVar()
+name2= StringVar()
+address2= StringVar()
+number2= StringVar()
+read2= StringVar()
+write2= StringVar()
+newcamera2 = IntVar()
+newmotion2 = IntVar()
+newbuzzer2 = IntVar()
+newfire2 = IntVar()
+newlock2 = IntVar()
 submit = Button(window, text=" Edit User ", bg="lime", fg= "black", font= "none 12 bold", width=20, height=2, command= openEditUser).place(x=50, y=140)
-##Get USER History
+
+##Get USER History BUTTON
+#Initilaizing all entry buttons and check boxes
 log= StringVar()
 id_num = StringVar()
 submit = Button(window, text="Request History", bg="lime", fg= "black", font= "none 12 bold", width=20, height=2, command= openHistory).place(x=50, y=200)
