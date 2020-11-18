@@ -20,7 +20,20 @@ def addNewUser():
     write_database(user_id1.get(), name1.get(), address1.get(), number1.get(), read1.get(), write1.get(), specs)
     
 def updateExisitingUser():
-    return 0
+    specs2 = ""
+    if newcamera2:
+        specs2 += "Camera, "
+    if newmotion2:
+        specs2 += "MotionSensor, "
+    if newbuzzer2:
+        specs2 += "Buzzer, "
+    if newfire2:
+        specs2 += "FireSensor, "
+    if newlock2:
+        specs2 += "DoorLock, " 
+    specs2[:-1]
+    specs2+= "."
+    write_database(user_id2.get(), name2.get(), address2.get(), number2.get(), read2.get(), write2.get(), specs2)
 
 def readHistory():
     log.set("")
