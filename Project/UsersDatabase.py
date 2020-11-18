@@ -41,6 +41,6 @@ def edit_database(iden, Name, addr, num, readkey, writekey, sp ):
     dbconnect = sqlite3.connect("users.db");
     dbconnect.row_factory = sqlite3.Row;
     cursor = dbconnect.cursor();
-    cursor.execute('UPDATE users SET Client Name = ?, Address = ?, Phone Number = ?, readKey = ?, writeKey = ?, System Specs = ?',(Id, name, address, phone, Rkey, Wkey, specs))
+    cursor.execute('UPDATE users SET (Client Name = ?, Address = ?, Phone Number = ?, readKey = ?, writeKey = ?, System Specs = ?)',(Id, name, address, phone, Rkey, Wkey, specs,))
     dbconnect.commit()
     dbconnect.close()
