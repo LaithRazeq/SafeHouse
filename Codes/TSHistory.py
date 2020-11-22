@@ -14,7 +14,6 @@ def thingspeak_write(id_num:int, date:str, time:str, sensor_type:str, save_locat
     val3=time
     val4=sensor_type
     val5=save_location
-    
     URL ='https://api.thingspeak.com/update?api_key='
     KEY= write_key
     HEADER='&field1={}&field2={}&field3={}&field4={}&field5={}'.format(val1, val2, val3, val4, val5)
@@ -40,18 +39,20 @@ def thingspeak_read(read_key:str,id_num: str, num_entries:str)->str:
     
     t=[]
     for x in field_1:
-        temp=""
-        temp+="ID: "
-        temp+=(str(x['field1']))
-        temp+=", Date: "
-        temp+=(str(x['field2']))
-        temp+=", Time: "
-        temp+=(str(x['field3']))
-        temp+=", Sensor: "
-        temp+=(str(x['field4']))
-        temp+=", Video_location: "
-        temp+=(str(x['field5']))        
-        t.append(temp)       
+        temp = []
+        temp.append(x['field1'])
+        temp.append(x['field2'])
+        temp.append(x['field3'])
+        temp.append(x['field4'])
+        temp.append(x['field5'])
+        t.append(temp)
     return t 
-    
-  
+
+   
+ID = '1162635' # TS History ID
+
+READ_KEY="XXNMKPPU1BIUDEHT" # TS History Read Key
+WRITE_KEY="0SRNSG4FBAVGI7TR"# TS Command Write Key
+WRITE_KEY_H="Y10RFX27NP5XFP5L"
+
+last_history_entry = thingspeak_read(READ_KEY, ID, "1")
