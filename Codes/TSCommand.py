@@ -35,5 +35,6 @@ def read_data_thingspeak(key:str, id_num:str):
         t.append(x['field2'])
         t.append(x['field3'])
         t.append(x['field4'])
-        t.append(x['field5'])               
+        t.append(x['field5'])
+        t.append(x['field6'])    
     return t

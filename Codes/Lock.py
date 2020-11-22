@@ -8,10 +8,15 @@ def configLock():
     GPIO.setmode(GPIO.BOARD)
     GPIO.setup(channel, GPIO.OUT)
     GPIO.output(7, GPIO.LOW)
+    return 1
     
 def lock(lockIsOn):
-    if lockIsOn:
+    if lockIsOn==1:
         GPIO.output(7, GPIO.HIGH)
-    else:
+        return 1
+    elif lockIsOn==0:
         GPIO.output(7, GPIO.LOW)
+        return 1
+    else:
+        return 0
     

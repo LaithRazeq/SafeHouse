@@ -7,8 +7,13 @@ def configMotion():
     GPIO.setwarnings(False)
     GPIO.setmode(GPIO.BOARD)
     GPIO.setup(channel, GPIO.IN)
+    return 1
 
 def motionDetect(motionIsOn)-> int:
-    if motionIsOn and GPIO.input(channel).HIGH:
-        return 1
-    return 0
+    if motionIsOn==1:
+        if GPIO.input(channel)==1:
+            return 1
+        else:
+            return 0
+    else:
+        return 0
