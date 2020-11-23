@@ -5,8 +5,10 @@ channel = 36
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(channel, GPIO.IN)
 def configFlame():
+    GPIO.setwarnings(False)
     GPIO.setmode(GPIO.BOARD)
     GPIO.setup(channel, GPIO.IN)
+    return 1
 
 
 def flameDetect(flameIsOn) -> int:
@@ -15,6 +17,8 @@ def flameDetect(flameIsOn) -> int:
                 return 1
             else:
                 return 0
+    elif flameIsOn==0:
+        return 1
     else:
         return 0
 

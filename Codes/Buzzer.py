@@ -4,6 +4,7 @@ import time
 channel = 38
 
 def configBuzzer():
+    GPIO.setwarnings(False)
     GPIO.setmode(GPIO.BOARD)
     GPIO.setup(channel, GPIO.OUT)
     GPIO.output(channel, GPIO.LOW)

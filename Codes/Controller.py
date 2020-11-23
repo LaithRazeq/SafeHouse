@@ -75,31 +75,37 @@ def updateStatus():
 ##Take action function        
 def takeAction(sensor):
     if sensor==0:
-        print("Motion Detected!!")
+#         print("Motion Detected!!")
         recordVideo(cameraIsOn)
         buzz(buzzerIsOn)
-        updateHistory(0)
+        updateHistory(0, cameraIsOn)
         return 1
     elif sensor==1:
-        print("Fire Detected!!")
+#         print("Fire Detected!!")
         buzz(buzzerIsOn)
         recordVideo(cameraIsOn)
-        updateHistory(1)
+        updateHistory(1, cameraIsOn)
         return 1
     else:
         return 0
 
 ##Updating the history thingspeak upon the occurence of an event    
-def updateHistory(sensor):
-    if sensor==0:   
+def updateHistory(sensor,cameraIsOn):
+    if sensor==0 and cameraIsOn==0:   
         sen="Motion"
-    else:
+        thingspeak_write(ID, D, T, sen, "NA", WRITE_KEY)
+        return 1
+    elif sensor==1 and cameraIsOn==0:
         sen="Flame"
-    if cameraIsOn==1:
+        thingspeak_write(ID, D, T, sen, "NA", WRITE_KEY)
+        return 1
+    elif sensor==0 and cameraIsOn==1:
+        sen="Motion"
         thingspeak_write(ID, D, T, sen, '/home/pi/Desktop/security', WRITE_KEY)
         return 1
-    elif cameraIsOn==0:
-        thingspeak_write(ID, D, T, sen, "NA", WRITE_KEY)
+    elif sensor==1 and cameraIsOn==1:
+        sen="Flame"
+        thingspeak_write(ID, D, T, sen, '/home/pi/Desktop/security', WRITE_KEY)
         return 1
     else:
         return 0
@@ -122,4 +128,10 @@ def recordVideo(cameraIsOn):
         return 0
 
 ##Run the main
-main()
+def startup():
+    x = int(input("To start system press 1/ Press 0 to quit: "))
+    if x==1:
+        main()
+    else:
+        print("bye")
+startup()
