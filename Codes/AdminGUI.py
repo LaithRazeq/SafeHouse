@@ -235,4 +235,9 @@ id_num = StringVar()
 submit = Button(window, text="Request History", bg="lime", fg= "black", font= "none 12 bold", width=20, height=2, command= openHistory).place(x=50, y=200)
 
 
-window.mainloop()
+
+x = int(input("To start system press 1/ Press 0 to quit: "))
+if x==1:
+    window.mainloop()
+else:
+    print("bye")

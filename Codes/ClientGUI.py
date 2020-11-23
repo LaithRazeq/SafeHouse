@@ -109,10 +109,11 @@ def openHistory():
 log = StringVar()    
 submit = Button(window, text="Request History", bg="lime", fg= "black", font= "none 12 bold", width=20, height=2, command= readHistory).place(x=270, y=480)
 
-#new_hist = win10toast.ToastNotifier()
 
-#if last_history_entry[0][5] == 5:
-    #new_hist.show_toast("New History!", "Request History to view!")
+x = int(input("To start system press 1/ Press 0 to quit: "))
+if x==1:
+    window.mainloop()
+else:
+    print("bye")
 
-window.mainloop()
 
