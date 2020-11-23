@@ -1,5 +1,5 @@
-from TSHistory import thingspeak_write
-from TSCommand import read_data_thingspeak
+from TSHistory import thingspeak_write_h
+from TSCommand import thingspeak_read_c
 # from Camera import*
 from Buzzer import*
 from Lock import*
@@ -13,10 +13,12 @@ import picamera
 ID = "1160874" # TS Command ID
 READ_KEY="YOLQ8V4RT6JCZE8Q" # TS Command Read Key
 WRITE_KEY="IOOAC36UJI0C2JFI" # TS History Write Key
+
 ##Date and Time
 gino= datetime.datetime.now()
 D=(str(gino.year)+'-'+str(gino.month)+'-'+str(gino.day))
 T=(str(gino.hour)+':'+str(gino.minute)+':'+str(gino.second))
+
 def getTime():
     global gino
     global D
@@ -24,6 +26,7 @@ def getTime():
     gino= datetime.datetime.now()
     D=(str(gino.year)+'-'+str(gino.month)+'-'+str(gino.day))
     T=(str(gino.hour)+':'+str(gino.minute)+':'+str(gino.second))
+    
 ##Global Variables
 isArmed=0
 motionIsOn=0
@@ -63,7 +66,7 @@ def updateStatus():
     global buzzerIsOn
     global motionIsOn
     global flameIsOn
-    curr_status=read_data_thingspeak(READ_KEY,ID)
+    curr_status=thingspeak_read_c(READ_KEY,ID)
     isArmed=int(curr_status[0])
     lockIsOn=int(curr_status[1])
     cameraIsOn=int(curr_status[2])
@@ -93,19 +96,19 @@ def takeAction(sensor):
 def updateHistory(sensor,cameraIsOn):
     if sensor==0 and cameraIsOn==0:   
         sen="Motion"
-        thingspeak_write(ID, D, T, sen, "NA", WRITE_KEY)
+        thingspeak_write_h(ID, D, T, sen, "NA", WRITE_KEY)
         return 1
     elif sensor==1 and cameraIsOn==0:
         sen="Flame"
-        thingspeak_write(ID, D, T, sen, "NA", WRITE_KEY)
+        thingspeak_write_h(ID, D, T, sen, "NA", WRITE_KEY)
         return 1
     elif sensor==0 and cameraIsOn==1:
         sen="Motion"
-        thingspeak_write(ID, D, T, sen, '/home/pi/Desktop/security', WRITE_KEY)
+        thingspeak_write_h(ID, D, T, sen, '/home/pi/Desktop/security', WRITE_KEY)
         return 1
     elif sensor==1 and cameraIsOn==1:
         sen="Flame"
-        thingspeak_write(ID, D, T, sen, '/home/pi/Desktop/security', WRITE_KEY)
+        thingspeak_write_h(ID, D, T, sen, '/home/pi/Desktop/security', WRITE_KEY)
         return 1
     else:
         return 0

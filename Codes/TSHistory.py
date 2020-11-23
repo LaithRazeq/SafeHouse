@@ -7,7 +7,7 @@ soso = datetime.datetime.now()
 d=(str(soso.year)+'-'+str(soso.month)+'-'+str(soso.day))
 t=(str(soso.hour)+':'+str(soso.minute)+':'+str(soso.second))
 
-def thingspeak_write(id_num:int, date:str, time:str, sensor_type:str, save_location:str, write_key:str):
+def thingspeak_write_h(id_num:int, date:str, time:str, sensor_type:str, save_location:str, write_key:str):
     
     val1=id_num
     val2=date   
@@ -20,12 +20,14 @@ def thingspeak_write(id_num:int, date:str, time:str, sensor_type:str, save_locat
     NEW_URL=URL+KEY+HEADER
    
     data= urllib.request.urlopen(NEW_URL)
+    
+    return 1
  
 
 
 
 
-def thingspeak_read(read_key:str,id_num: str, num_entries:str)->str:
+def thingspeak_read_h(read_key:str,id_num: str, num_entries:str)->str:
     URL = 'https://api.thingspeak.com/channels/'+id_num+'/feeds.json?api_key='
     KEY= read_key
     HEADER='&results='
@@ -46,13 +48,6 @@ def thingspeak_read(read_key:str,id_num: str, num_entries:str)->str:
         temp.append(x['field4'])
         temp.append(x['field5'])
         t.append(temp)
-    return t 
+    return t ## returns array of arrays with the data from thingspeak channel
 
    
-ID = '1162635' # TS History ID
-
-READ_KEY="XXNMKPPU1BIUDEHT" # TS History Read Key
-WRITE_KEY="0SRNSG4FBAVGI7TR"# TS Command Write Key
-WRITE_KEY_H="Y10RFX27NP5XFP5L"
-
-last_history_entry = thingspeak_read(READ_KEY, ID, "1")

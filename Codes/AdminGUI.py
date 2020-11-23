@@ -1,5 +1,5 @@
 from tkinter import *
-from TSHistory import thingspeak_read
+from TSHistory import thingspeak_read_h
 from UsersDatabase import *
 
 
@@ -18,6 +18,7 @@ def addNewUser():
     specs[:-1]
     specs+= "."
     write_database(user_id1.get(), name1.get(), address1.get(), number1.get(), read1.get(), write1.get(), specs)
+    return 1
     
 def updateExisitingUser():
     specs2 = ""
@@ -34,15 +35,17 @@ def updateExisitingUser():
     specs2[:-1]
     specs2+= "."
     write_database(user_id2.get(), name2.get(), address2.get(), number2.get(), read2.get(), write2.get(), specs2)
+    return 1
 
-def readHistory():
+def readHistory_admin():
     log.set("")
     key = read_database(id_num.get())
-    arr = thingspeak_read(key,id_num.get(), "10")
+    arr = thingspeak_read_h(key,id_num.get(), "10")
     h= ""
     for x in arr:
         h+= x+'\n\n'
     log.set(h)
+    return 1
 
 # Add new user window
 def openNewUser():  
@@ -180,7 +183,7 @@ def openHistory():
     #History Labels     
     Label(history, textvariable=log, justify= LEFT, padx= 2, pady= 2, bg="grey").place(x=120, y=90)
     
-    req = Button(history, text="Request", fg= "black", font= "none 12 bold", width=10, height=1, command= readHistory).place(x=400, y=40)
+    req = Button(history, text="Request", fg= "black", font= "none 12 bold", width=10, height=1, command= readHistory_admin).place(x=400, y=40)
     
         
     

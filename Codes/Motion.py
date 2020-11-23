@@ -16,6 +16,6 @@ def motionDetect(motionIsOn)-> int:
         else:
             return 0
     elif motionIsOn==0:
-        return 1
+        return 2
     else:
         return 0

@@ -1,6 +1,6 @@
 from tkinter import *
-from TSHistory import thingspeak_read
-from TSCommand import thingspeak_write
+from TSHistory import thingspeak_read_h
+from TSCommand import thingspeak_write_c
 #import win10toast
 
 
@@ -8,19 +8,19 @@ ID = '1162635' # TS History ID
 
 READ_KEY="XXNMKPPU1BIUDEHT" # TS History Read Key
 WRITE_KEY="0SRNSG4FBAVGI7TR"# TS Command Write Key
-#WRITE_KEY_H="Y10RFX27NP5XFP5L"
 
-#last_history_entry = thingspeak_read(READ_KEY, ID, "1")
 
 # Functions
 def systemUpToDate():
-    thingspeak_write(isArmed.get(), isLocked.get(), isCamera.get(), isBuzzer.get(), isMotion.get(), isFlame.get(), WRITE_KEY)
+    thingspeak_write_c(isArmed.get(), isLocked.get(), isCamera.get(), isBuzzer.get(), isMotion.get(), isFlame.get(), WRITE_KEY)
     label.set("System Status: Up to date")
+    return 1
     
 
     
 def systemNotUpToDate():
     label.set("System Status: NOT up to date")
+    return 1
     
     
    
@@ -28,7 +28,7 @@ def systemNotUpToDate():
 def readHistory():
     openHistory()
     log.set("")
-    arr = thingspeak_read(READ_KEY,ID, "10")
+    arr = thingspeak_read_h(READ_KEY,ID, "10")
     history= ""
     for x in arr:
         for i in range(5):
@@ -45,6 +45,7 @@ def readHistory():
             temp+=(str(x[4]))              
         history+= temp +'\n\n'
     log.set(history)
+    return 1
    
 
 # Create main window
