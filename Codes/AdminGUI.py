@@ -40,11 +40,23 @@ def updateExisitingUser():
 def readHistory_admin():
     log.set("")
     key = read_database(id_num.get())
-    arr = thingspeak_read_h(key,id_num.get(), "10")
-    h= ""
+    arr = thingspeak_read_h(key,id_num.get(), select.get())
+    history= ""
     for x in arr:
-        h+= x+'\n\n'
-    log.set(h)
+        for i in range(5):
+            temp=""
+            temp+="ID: "
+            temp+=(str(x[0]))
+            temp+=", Date: "
+            temp+=(str(x[1]))
+            temp+=", Time: "
+            temp+=(str(x[2]))
+            temp+=", Sensor: "
+            temp+=(str(x[3]))
+            temp+=", Video_location: "
+            temp+=(str(x[4]))              
+        history+= temp +'\n\n'
+    log.set(history)
     return 1
 
 # Add new user window
@@ -174,16 +186,17 @@ def openHistory():
     Label(history,  
           text ="Pull History of User With Unique ID", font="none 16 bold").pack()
     
-    Label(history, text="Insert Desired Id", fg= "black", font= "none 12 bold").place(x=200, y=45)
-    iD = Entry(history, textvariable= id_num, width=5)
+    Label(history, text="Insert Desired Id", fg= "black", font= "none 12 bold").place(x=100, y=45)
+    iD = Entry(history, textvariable= id_num, width=10)
     iD.pack()
-    iD.place(x=340,y=47)
-    
+    iD.place(x=230,y=47)
+    Label(history, text="Number of History Logs", fg= "black", font= "none 12 bold").place(x=310, y=45)
+    OptionMenu(history, select, "1","5", "10","15","20").place(x=500, y=45)
     
     #History Labels     
     Label(history, textvariable=log, justify= LEFT, padx= 2, pady= 2, bg="grey").place(x=120, y=90)
     
-    req = Button(history, text="Request", fg= "black", font= "none 12 bold", width=10, height=1, command= readHistory_admin).place(x=400, y=40)
+    req = Button(history, text="Request", fg= "black", font= "none 12 bold", width=10, height=1, command= readHistory_admin).place(x=570, y=43)
     
         
     
@@ -230,6 +243,7 @@ submit = Button(window, text=" Edit User ", bg="lime", fg= "black", font= "none 
 
 ##Get USER History BUTTON
 #Initilaizing all entry buttons and check boxes
+select = StringVar()
 log= StringVar()
 id_num = StringVar()
 submit = Button(window, text="Request History", bg="lime", fg= "black", font= "none 12 bold", width=20, height=2, command= openHistory).place(x=50, y=200)

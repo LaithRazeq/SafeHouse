@@ -76,7 +76,7 @@ class TestSafeHouse(unittest.TestCase):
     def testSystemNotUpToDate(self):
         self.assertEqual(systemNotUpToDate(),1,'Ensure that funtion returns 1 when system status label is updated successfully')
     def testReadHistory(self):
-        self.assertEqual(readHistorty(),1,'Ensure that function returns 1 when history is read and printed successfully from the TS Channel')
+        self.assertEqual(readHistory(),1,'Ensure that function returns 1 when history is read and printed successfully from the TS Channel')
         
     ##Testing Admin GUI functionality
     def testAddNewUser(self):
