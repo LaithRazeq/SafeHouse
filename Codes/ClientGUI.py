@@ -25,10 +25,9 @@ def systemNotUpToDate():
     
    
 
-def readHistory():
-    openHistory()
+def readHistory(v: str):
     log.set("")
-    arr = thingspeak_read_h(READ_KEY,ID, "10")
+    arr = thingspeak_read_h(READ_KEY,ID, v)
     history= ""
     for x in arr:
         for i in range(5):
@@ -90,7 +89,9 @@ submit = Button(window, text="Update System Status", bg="lime", fg= "black", fon
 
 
 ##SYSTEM HISTORY BUTTON
-def openHistory():  
+def openHistory():
+    def letsDoThis():
+        readHistory(select.get())
     # Toplevel object which will  
     # be treated as a new window 
     history = Toplevel(window)
@@ -101,13 +102,21 @@ def openHistory():
     history.minsize(700,220)
     # A Label widget to show in toplevel 
     Label(history,  
-          text ="Pull History of User With Unique ID", font="none 16 bold").pack()
-    
+          text ="Select Number of History Entries", font="none 16 bold").pack()
+    # Option meneu for choosing number of entries
+    select = StringVar(history)
+    select.set("1") # default value
+    w = OptionMenu(history, select, "1","5", "10","15","20").place(x=300, y=30)    
+    req=Button(history, text="Request", fg= "black", font= "none 12 bold", width=10, height=1, command= letsDoThis).place(x=360, y=30)   
     #History Labels     
-    Label(history, textvariable=log, justify= LEFT, padx= 2, pady= 2, bg="grey").place(x=120, y=90)
+    Label(history, textvariable=log, justify= LEFT, padx= 1, pady= 1, bg="grey").place(x=120, y=70)
+    
+    
+    
+    
 
 log = StringVar()    
-submit = Button(window, text="Request History", bg="lime", fg= "black", font= "none 12 bold", width=20, height=2, command= readHistory).place(x=270, y=480)
+submit = Button(window, text="Request History", bg="lime", fg= "black", font= "none 12 bold", width=20, height=2, command= openHistory).place(x=270, y=480)
 
 
 x = int(input("To start system press 1/ Press 0 to quit: "))
