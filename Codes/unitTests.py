@@ -1,3 +1,14 @@
+"""
+This Class will test most of the functions used for this project, these tests
+need to be ran on a RPI. Each test has a comment specifying what is being
+testsed, when you run the script you will have to close the GUIs and Controller 
+script by pressing 0 three times.
+
+Author(s): Azizul Hassan, Ahmed Abdelrazik
+Co-Author(s): Laith Abdelrazeq, Ramit Mahajan
+Last Modified: 8-DEC-2020
+"""
+
 import unittest
 from Controller import*
 from Buzzer import*
@@ -86,6 +97,8 @@ class TestSafeHouse(unittest.TestCase):
     def testReadHistoryAdmin(self):
         self.assertEqual(readHistorty_admin(),1,'Ensure that function returns 1 when history is read and printed successfully from the TS Channel')    
     
-                
+    
+## Main Script
+        
 if __name__ == '__main__':
     unittest.main()

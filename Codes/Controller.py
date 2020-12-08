@@ -1,6 +1,12 @@
-from TSHistory import thingspeak_write_h
+"""
+This file runs the Controller and all its functionalities, to start run the 
+script and enter 1 to start or 0 to exit. This file needs to run on a RPI.
+
+Author(s): Laith Abdelrazeq
+Co-Author(s): Ahmed Abdelrazik, Azizul Hassan
+Last Modified: 8-DEC-2020
+"""
 from TSCommand import thingspeak_read_c
-# from Camera import*
 from Buzzer import*
 from Lock import*
 from Motion import*
@@ -10,24 +16,13 @@ import time
 import picamera
 
 ##ThingSpeak Channels' Information 
+
 ID = "1160874" # TS Command ID
 READ_KEY="YOLQ8V4RT6JCZE8Q" # TS Command Read Key
 WRITE_KEY="IOOAC36UJI0C2JFI" # TS History Write Key
 
-##Date and Time
-gino= datetime.datetime.now()
-D=(str(gino.year)+'-'+str(gino.month)+'-'+str(gino.day))
-T=(str(gino.hour)+':'+str(gino.minute)+':'+str(gino.second))
-
-def getTime():
-    global gino
-    global D
-    global T
-    gino= datetime.datetime.now()
-    D=(str(gino.year)+'-'+str(gino.month)+'-'+str(gino.day))
-    T=(str(gino.hour)+':'+str(gino.minute)+':'+str(gino.second))
-    
 ##Global Variables
+
 isArmed=0
 motionIsOn=0
 flameIsOn=0
@@ -35,7 +30,27 @@ lockIsOn=0
 cameraIsOn=0
 buzzerIsOn=0
 
-##Main function running the system
+#Reading current date & time
+gino= datetime.datetime.now()
+D=(str(gino.year)+'-'+str(gino.month)+'-'+str(gino.day))
+T=(str(gino.hour)+':'+str(gino.minute)+':'+str(gino.second))
+
+##Functions
+
+def getTime():
+    '''
+    This function updates global variables D & T, which represent current 
+    date and time.
+    '''
+    global gino
+    global D
+    global T
+    gino= datetime.datetime.now()
+    D=(str(gino.year)+'-'+str(gino.month)+'-'+str(gino.day))
+    T=(str(gino.hour)+':'+str(gino.minute)+':'+str(gino.second))
+    
+
+#Main function running the system
 def main():
     configSystem()
     while True:
@@ -50,16 +65,25 @@ def main():
                 takeAction(1)
         time.sleep(1)
 
-##Configuring the System
-def configSystem():
+#Configuring the System
+def configSystem()->int:
+    '''
+    Returns 1 if successful. this function configures the system by callin all 
+    the config functions from their respective files.
+    '''
     configMotion()
     configFlame()
     configLock()
     configBuzzer()
     return 1
 
-##Updating the sensor's status from the thingSpeak command channel       
-def updateStatus():
+#Updating the sensor's status from the thingSpeak command channel       
+def updateStatus()->int:
+    '''
+    Returns 1 if successful, this function updates the global variables from the 
+    TS Command Channel, these variables will then be checked to know which 
+    hardware is activated by the client.
+    '''
     global isArmed
     global lockIsOn
     global cameraIsOn
@@ -75,8 +99,13 @@ def updateStatus():
     flameIsOn=int(curr_status[5])
     return 1
 
-##Take action function        
-def takeAction(sensor):
+#Take action function        
+def takeAction(sensor: int)->int:
+    '''
+    Returns 1 if entry valid 0 otherwise, this function will take an action upon
+    the value of the param sensor, the function will take an action and write to 
+    the TS History channel by calling updateHistory function.
+    '''
     if sensor==0:
 #         print("Motion Detected!!")
         recordVideo(cameraIsOn)
@@ -92,8 +121,13 @@ def takeAction(sensor):
     else:
         return 0
 
-##Updating the history thingspeak upon the occurence of an event    
-def updateHistory(sensor,cameraIsOn):
+#Updating the history thingspeak upon the occurence of an event    
+def updateHistory(sensor:int,cameraIsOn:int)->int:
+    '''
+    Returns 1 if entry valid 0 otherwise, this function will write to the 
+    TS Histroy channel based on which snesor is active ,param sensor, and also 
+    upon whether the camera is active or not, param camerIsOn. 
+    '''
     if sensor==0 and cameraIsOn==0:   
         sen="Motion"
         thingspeak_write_h(ID, D, T, sen, "NA", WRITE_KEY)
@@ -113,8 +147,12 @@ def updateHistory(sensor,cameraIsOn):
     else:
         return 0
         
-def recordVideo(cameraIsOn):
-    cock=str(gino)
+def recordVideo(cameraIsOn:int)->int:
+    '''
+    Return 1 if entry valid 0 otherwise, this function configures and the 
+    records a video if param cameraIsOn is 1, and saves this vedio in the 
+    specified location and with the current date and time of the incident.
+    '''
     if cameraIsOn==1:
         with picamera.PiCamera() as camera:
             camera.resolution=(1280, 720)
@@ -130,11 +168,10 @@ def recordVideo(cameraIsOn):
     else:
         return 0
 
-##Run the main
-def startup():
-    x = int(input("To start system press 1/ Press 0 to quit: "))
-    if x==1:
-        main()
-    else:
-        print("bye")
-startup()
+## Main Script
+    
+x = int(input("To start system press 1/ Press 0 to quit: "))
+if x==1:
+    main()
+else:
+    print("bye")
