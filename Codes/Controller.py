@@ -3,7 +3,7 @@ This file runs the Controller and all its functionalities, to start run the
 script and enter 1 to start or 0 to exit. This file needs to run on a RPI.
 
 Author(s): Laith Abdelrazeq
-Co-Author(s): Ahmed Abdelrazik, Azizul Hassan
+Co-Author(s): Ahmed Abdelrazik, Azizul Hasan
 Last Modified: 8-DEC-2020
 """
 from TSCommand import thingspeak_read_c

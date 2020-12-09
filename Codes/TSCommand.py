@@ -2,7 +2,7 @@
 This file contains the functions which writes and reads from the TS Command 
 Channel. 
 
-Author(s): Azizul Hassan
+Author(s): Azizul Hasan
 Co-Author(s): Ahmed Abdelrazik 
 Last Modified: 8-DEC-2020
 """

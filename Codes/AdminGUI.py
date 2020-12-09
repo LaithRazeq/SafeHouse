@@ -59,7 +59,7 @@ def updateExisitingUser()->int:
     edit_database(user_id2.get(), name2.get(), address2.get(), number2.get(), read2.get(), write2.get(), specs2)
     return 1
 
-def readHistory_admin()->int:
+def readHistoryAdmin()->int:
     '''
     Returns 1 if successful, This function reads the TS History channel and 
     updates the log variable which is later on showed in the GUI, this function 
@@ -243,7 +243,7 @@ def openHistory():
     
     #History Labels     
     Label(history, textvariable=log, justify= LEFT, padx= 2, pady= 2, bg="grey").place(x=120, y=90)
-    Button(history, text="Request", fg= "black", font= "none 12 bold", width=10, height=1, command= readHistory_admin).place(x=570, y=43)
+    Button(history, text="Request", fg= "black", font= "none 12 bold", width=10, height=1, command= readHistoryAdmin).place(x=570, y=43)
     
         
     

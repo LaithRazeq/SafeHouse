@@ -2,7 +2,7 @@
 This file contains the functions which writes, reads and edits the locally saved
 'users.db' sql database.
 
-Author(s): Azizul Hassan, Ahmed Abdelrazik
+Author(s): Azizul Hasan, Ahmed Abdelrazik
 Co-Author(s): Laith Abdelrazeq
 Last Modified: 8-DEC-2020
 """

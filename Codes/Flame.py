@@ -1,7 +1,7 @@
 """
 This file runs the configurations and main functionality of the flame sensor. 
 
-Author(s):  Azizul Hassan
+Author(s):  Azizul Hasan
 Co-Author(s): Ahmed Abdelrazik, Laith Abdelrazeq 
 Last Modified: 8-DEC-2020
 """
